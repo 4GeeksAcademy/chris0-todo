@@ -5,10 +5,15 @@ export default function TodoForm(props) {
   const [input, setInput] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    props.addTodo(input)
-    setInput("")
-  }
+    e.preventDefault();
+    if (input.trim()) {
+      props.addTodo({ label: input, is_done: false });
+      setInput("");
+    } else {
+      console.error("Please enter a valid todo");
+    }
+  };
+  
 
   return (
     <form onSubmit={handleSubmit} className="todo-form">
